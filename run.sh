@@ -14,7 +14,7 @@ fi
 
 INSTANCE_IDS=$(aws elb describe-load-balancers --load-balancer ${ELB_NAME} | jq -r '.LoadBalancerDescriptions[].Instances[].InstanceId' | awk -v ORS=' ' '{print $1}')
 
-aws elb unregister-instances-from-load-balancer \
+aws elb deregister-instances-from-load-balancer \
   --load-balancer-name ${ELB_NAME} \
   --instances ${INSTANCE_IDS}
 
